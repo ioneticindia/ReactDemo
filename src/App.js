@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import styles from './App.module.css';
 import Person from './Person/Person';
 
 const App = () => {
@@ -45,26 +45,13 @@ const App = () => {
     setPersonsState({ persons });
   }
 
-  const style = {
-    backgroundColor: 'green',
-    color: 'white',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px',
-    cursor: 'pointer',
-    ':hover': {
-      backgroundColor: 'lightgreen',
-      color: 'black'
-    }
-  }
-
   const togglePersonsHandler = () => {
     let isVisible = showPersonsState.isVisible;
     setShowPersonsState({ isVisible: !isVisible });
   }
 
-  let persons = null
-
+  let persons = null;
+  let btnClass = '';
   if (showPersonsState.isVisible) {
     persons = (
       <div>
@@ -79,28 +66,23 @@ const App = () => {
           })}
       </div>
     )
-    style.backgroundColor = 'red';
-    style[":hover"] = {
-      backgroundColor: 'salmon',
-      color: 'black'
-    }
+    btnClass = styles.Red;
   }
   
   const classes = [];
   if(personsState.persons.length <= 2) {
-    classes.push('red');
+    classes.push(styles.red);
   }
   if(personsState.persons.length <= 1) {
-    classes.push('bold');
+    classes.push(styles.bold);
   }
   
-
   return (
-    <div className="App">
+    <div className={styles.App}>
       <h1>Hi, I'm React Demo App.</h1>
       <p className={classes.join(' ')}>This is really working !</p>
       <button
-        style={style}
+        className={btnClass}
         onClick={togglePersonsHandler}>Toggle Persons</button>
       {
         showPersonsState.isVisible ? persons : null
