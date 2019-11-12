@@ -67,9 +67,7 @@ const App = () => {
         persons={personsState.persons}
         clicked={togglePersonsHandler}
         showPersons={showPersonsState.isVisible}></Cockpit>
-      {
-        showPersonsState.isVisible ? persons : null
-      }
+      {persons}
     </div>
   );
 }
