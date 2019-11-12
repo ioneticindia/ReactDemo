@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './App.module.css';
-import Person from '../components/Person/Person';
+import PersonList from '../components/PersonList/PersonList';
 
 const App = () => {
   const [personsState, setPersonsState] = useState({
@@ -54,17 +54,10 @@ const App = () => {
   let btnClass = '';
   if (showPersonsState.isVisible) {
     persons = (
-      <div>
-        {
-          personsState.persons.map((person, index) => {
-            return <Person
-                      name={person.name}
-                      click={deletePersonHandler.bind(this, index)}
-                      age={person.age}
-                      changed={(event) => nameChangedHandler(event, person.id)}
-                      key={person.id}>My hobby is Racing.</Person>
-          })}
-      </div>
+      <PersonList
+      persons={personsState.persons}
+      clicked={deletePersonHandler}
+      changed={nameChangedHandler}></PersonList>
     )
     btnClass = styles.Red;
   }
