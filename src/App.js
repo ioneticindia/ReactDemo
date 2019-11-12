@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium, {StyleRoot} from 'radium';
 
 const App = () => {
   const [personsState, setPersonsState] = useState({
@@ -97,19 +96,17 @@ const App = () => {
   
 
   return (
-    <StyleRoot>
-      <div className="App">
-        <h1>Hi, I'm React Demo App.</h1>
-        <p className={classes.join(' ')}>This is really working !</p>
-        <button
-          style={style}
-          onClick={togglePersonsHandler}>Toggle Persons</button>
-        {
-          showPersonsState.isVisible ? persons : null
-        }
-      </div>
-    </StyleRoot>
+    <div className="App">
+      <h1>Hi, I'm React Demo App.</h1>
+      <p className={classes.join(' ')}>This is really working !</p>
+      <button
+        style={style}
+        onClick={togglePersonsHandler}>Toggle Persons</button>
+      {
+        showPersonsState.isVisible ? persons : null
+      }
+    </div>
   );
 }
 
-export default Radium(App);
+export default App;
