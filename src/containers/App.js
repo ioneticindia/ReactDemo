@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './App.module.css';
 import PersonList from '../components/PersonList/PersonList';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 const App = () => {
   const [personsState, setPersonsState] = useState({
@@ -51,7 +52,6 @@ const App = () => {
   }
 
   let persons = null;
-  let btnClass = '';
   if (showPersonsState.isVisible) {
     persons = (
       <PersonList
@@ -59,24 +59,14 @@ const App = () => {
       clicked={deletePersonHandler}
       changed={nameChangedHandler}></PersonList>
     )
-    btnClass = styles.Red;
-  }
-  
-  const classes = [];
-  if(personsState.persons.length <= 2) {
-    classes.push(styles.red);
-  }
-  if(personsState.persons.length <= 1) {
-    classes.push(styles.bold);
   }
   
   return (
     <div className={styles.App}>
-      <h1>Hi, I'm React Demo App.</h1>
-      <p className={classes.join(' ')}>This is really working !</p>
-      <button
-        className={btnClass}
-        onClick={togglePersonsHandler}>Toggle Persons</button>
+      <Cockpit
+        persons={personsState.persons}
+        clicked={togglePersonsHandler}
+        showPersons={showPersonsState.isVisible}></Cockpit>
       {
         showPersonsState.isVisible ? persons : null
       }
