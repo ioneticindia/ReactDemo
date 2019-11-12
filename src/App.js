@@ -6,14 +6,17 @@ const App = () => {
   const [personsState, setPersonsState] = useState({
     persons: [
       {
+        id: 'dsfsf',
         name: 'Ravi',
         age: 24
       },
       {
+        id: '9dii4',
         name: 'Ajay',
         age: 27
       },
       {
+        id: 'tesers',
         name: 'Keshav',
         age: 26
       }
@@ -30,25 +33,15 @@ const App = () => {
     setPersonsState({ persons });
   }
 
-  const nameChangedHandler = (evt) => {
-    let persons = [
-      {
-        name: evt.target.value,
-        age: 28
-      },
-      {
-        name: 'Ravi',
-        age: 24
-      },
-      {
-        name: 'Ajay',
-        age: 27
-      },
-      {
-        name: 'Keshav',
-        age: 26
-      }
-    ]
+  const nameChangedHandler = (evt, id) => {
+    const personIndex = personsState.persons.findIndex((p) => {
+      return p.id === id
+    })
+    const person = {...personsState.persons[personIndex]}
+    person.name = evt.target.value;
+    
+    const persons = [...personsState.persons]
+    persons[personIndex] = person
     setPersonsState({ persons });
   }
 
@@ -73,9 +66,11 @@ const App = () => {
         {
           personsState.persons.map((person, index) => {
             return <Person
-              name={person.name}
-              click={deletePersonHandler.bind(this, index)}
-              age={person.age}>My hobby is Racing.</Person>
+                      name={person.name}
+                      click={deletePersonHandler.bind(this, index)}
+                      age={person.age}
+                      changed={(event) => nameChangedHandler(event, person.id)}
+                      key={person.id}>My hobby is Racing.</Person>
           })}
       </div>
     )
